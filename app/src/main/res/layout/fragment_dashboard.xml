@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F6FA">
+    android:background="#F4F6F9"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,270 +12,618 @@
         android:orientation="vertical"
         android:paddingBottom="24dp">
 
+        <!-- ================= TOP BLUE HEADER ================= -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1D63ED"
+            android:background="@drawable/bg_header_gradient"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
 
-            <TextView
-                android:id="@+id/tvGreetingDate"
-                android:layout_width="wrap_content"
+            <!-- Top Row: Badge + Greeting/ID + Notification/Refresh -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Good evening · Tue, Nov 24"
-                android:textColor="#DCE8FF"
-                android:textSize="12sp" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvUserPhone"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tvTopBadge"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_glass_box"
+                    android:gravity="center"
+                    android:text="01"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvGreetingDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Good evening • Tue, Nov 24"
+                        android:textColor="#D0E2FF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvUserCredential"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="01601011171"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnNotifications"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_glass_box"
+                    android:contentDescription="Alerts"
+                    android:src="@android:drawable/ic_popup_reminder"
+                    app:tint="#FFFFFF" />
+
+                <ImageButton
+                    android:id="@+id/btnRefresh"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_glass_box"
+                    android:contentDescription="Refresh"
+                    android:src="@android:drawable/ic_popup_sync"
+                    app:tint="#FFFFFF" />
+            </LinearLayout>
+
+            <!-- Middle Row: Fleet / Online / Offline -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="01601011171"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_glass_box"
+                android:orientation="horizontal"
+                android:paddingVertical="12dp">
 
-            <ImageButton
-                android:id="@+id/btnRefresh"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:background="#3B7BF5"
-                android:contentDescription="Refresh"
-                android:src="@android:drawable/ic_popup_sync" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvFleetCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FLEET"
+                        android:textColor="#C5D9F8"
+                        android:textSize="11sp" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvFleetCount"
+                <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#33FFFFFF" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvOnlineCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="• 0"
+                        android:textColor="#69F0AE"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ONLINE"
+                        android:textColor="#C5D9F8"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#33FFFFFF" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvOfflineCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="OFFLINE"
+                        android:textColor="#C5D9F8"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Bottom Status Bar inside Header -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="1"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvOnlineCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#7CFFB2"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_glass_box"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="3dp"
+                    android:text="● Live"
+                    android:textColor="#69F0AE"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvOfflineCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tvLiveStatusMsg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="No vehicles are online right now"
+                    android:textColor="#E3F2FD"
+                    android:textSize="11sp" />
 
-            <TextView
-                android:id="@+id/tvLiveStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Live · No vehicles are online right now"
-                android:textColor="#E8F0FF"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tvLastSyncTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9:36 PM"
+                    android:textColor="#C5D9F8"
+                    android:textSize="11sp" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <!-- ================= CARD 1: DISTANCE DRIVEN ================= -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDistance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:background="#FFFFFF"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TODAY · Distance driven"
-                android:textColor="#6B7280"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvDistanceDriven"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="#EEF2FF"
+                        android:padding="8dp"
+                        android:src="@android:drawable/ic_dialog_map"
+                        app:tint="#3F51B5" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TODAY"
+                            android:textColor="#3F51B5"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Distance driven"
+                            android:textColor="#1A1C1E"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=">"
+                        android:textColor="#9AA0A6"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvDistanceKm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#1A1C1E"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="km"
+                        android:textColor="#5F6368"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvDistanceSub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Across 1 vehicle • open reports"
+                    android:textColor="#70757A"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ================= CARD 2: FLEET STATUS ================= -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="0 km"
-                android:textColor="#111827"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvDistanceSub"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="#E8F0FE"
+                        android:padding="8dp"
+                        android:src="@android:drawable/ic_menu_directions"
+                        app:tint="#1976D2" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fleet Status"
+                            android:textColor="#1A1C1E"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvFleetTotalSub"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1 vehicles total"
+                            android:textColor="#70757A"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/btnViewAllFleet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_pill_light"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="6dp"
+                        android:text="View All >"
+                        android:textColor="#1976D2"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="110dp"
+                        android:layout_height="110dp">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/circular_progress_gray" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/tvFleetRingCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1"
+                                android:textColor="#1A1C1E"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="TOTAL"
+                                android:textColor="#70757A"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="6dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Running" android:textColor="#5F6368" android:textSize="13sp"/>
+                            <TextView android:id="@+id/tvRunningCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#2E7D32" android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="6dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Idle" android:textColor="#5F6368" android:textSize="13sp"/>
+                            <TextView android:id="@+id/tvIdleCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#F9A825" android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="6dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Stopped" android:textColor="#5F6368" android:textSize="13sp"/>
+                            <TextView android:id="@+id/tvStoppedCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#C62828" android:textStyle="bold"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ================= CARD 3: VEHICLE CARE PULSE ================= -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Across 1 vehicle · open reports"
-                android:textColor="#6B7280"
-                android:textSize="12sp" />
-        </LinearLayout>
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <LinearLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="#FFEBEE"
+                        android:padding="8dp"
+                        android:src="@android:drawable/ic_menu_info_details"
+                        app:tint="#E53935" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vehicle Care Pulse" android:textColor="#1A1C1E" android:textSize="15sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Power • GPS trust" android:textColor="#70757A" android:textSize="12sp" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvRiskBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFEBEE"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="At risk"
+                        android:textColor="#D32F2F"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:progress="2"
+                            android:progressDrawable="@drawable/circular_progress_gray" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView android:id="@+id/tvCareScore" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#D32F2F" android:textSize="22sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CARE" android:textColor="#70757A" android:textSize="10sp" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="6dp"
+                            android:layout_weight="1"
+                            android:background="#F8F9FA"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+                            <TextView android:id="@+id/tvHealthyCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#2E7D32" android:textSize="18sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HEALTHY" android:textColor="#70757A" android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:background="#F8F9FA"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+                            <TextView android:id="@+id/tvNeedCareCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" android:textColor="#D32F2F" android:textSize="18sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NEED CARE" android:textColor="#70757A" android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ================= SHORTCUTS SECTION ================= -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp"
+            android:text="⚡ Shortcuts"
+            android:textColor="#1A1C1E"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:background="#FFFFFF"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginTop="8dp"
+            android:columnCount="4"
+            android:rowCount="2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fleet Status"
-                android:textColor="#111827"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+            <!-- 1. Map -->
+            <LinearLayout android:id="@+id/btnShortcutMap" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="#FFFFFF" android:gravity="center" android:orientation="vertical" android:padding="12dp">
+                <ImageView android:layout_width="38dp" android:layout_height="38dp" android:background="#E3F2FD" android:padding="8dp" android:src="@android:drawable/ic_dialog_map" app:tint="#1976D2" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Map" android:textColor="#1976D2" android:textSize="12sp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvViewAllFleet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="View All >"
-                android:textColor="#1D63ED"
-                android:textSize="13sp" />
+            <!-- 2. Vehicles -->
+            <LinearLayout android:id="@+id/btnShortcutVehicles" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="#FFFFFF" android:gravity="center" android:orientation="vertical" android:padding="12dp">
+                <ImageView android:layout_width="38dp" android:layout_height="38dp" android:background="#E0F2F1" android:padding="8dp" android:src="@android:drawable/ic_menu_directions" app:tint="#00897B" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Vehicles" android:textColor="#00897B" android:textSize="12sp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvRunningCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Running: 0"
-                android:textColor="#374151" />
+            <!-- 3. Alerts -->
+            <LinearLayout android:id="@+id/btnShortcutAlerts" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="#FFFFFF" android:gravity="center" android:orientation="vertical" android:padding="12dp">
+                <ImageView android:layout_width="38dp" android:layout_height="38dp" android:background="#FFF3E0" android:padding="8dp" android:src="@android:drawable/ic_popup_reminder" app:tint="#FB8C00" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Alerts" android:textColor="#FB8C00" android:textSize="12sp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvIdleCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Idle: 0"
-                android:textColor="#374151" />
+            <!-- 4. Reports -->
+            <LinearLayout android:id="@+id/btnShortcutReports" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="#FFFFFF" android:gravity="center" android:orientation="vertical" android:padding="12dp">
+                <ImageView android:layout_width="38dp" android:layout_height="38dp" android:background="#F3E5F5" android:padding="8dp" android:src="@android:drawable/ic_menu_agenda" app:tint="#8E24AA" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Reports" android:textColor="#8E24AA" android:textSize="12sp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvStoppedCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Stopped: 0"
-                android:textColor="#374151" />
-        </LinearLayout>
+            <!-- 5. Geofence -->
+            <LinearLayout android:id="@+id/btnShortcutGeofence" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="#FFFFFF" android:gravity="center" android:orientation="vertical" android:padding="12dp">
+                <ImageView android:layout_width="38dp" android:layout_height="38dp" android:background="#FCE4EC" android:padding="8dp" android:src="@android:drawable/ic_menu_compass" app:tint="#D81B60" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Geofence" android:textColor="#D81B60" android:textSize="12sp" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:background="#FFFFFF"
-            android:orientation="vertical"
-            android:padding="16dp">
+            <!-- 6. POI -->
+            <LinearLayout android:id="@+id/btnShortcutPoi" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="#FFFFFF" android:gravity="center" android:orientation="vertical" android:padding="12dp">
+                <ImageView android:layout_width="38dp" android:layout_height="38dp" android:background="#E0F7FA" android:padding="8dp" android:src="@android:drawable/ic_menu_mylocation" app:tint="#00ACC1" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="POI" android:textColor="#00ACC1" android:textSize="12sp" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vehicle Care Pulse"
-                android:textColor="#111827"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+            <!-- 7. Playback -->
+            <LinearLayout android:id="@+id/btnShortcutPlayback" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="#FFFFFF" android:gravity="center" android:orientation="vertical" android:padding="12dp">
+                <ImageView android:layout_width="38dp" android:layout_height="38dp" android:background="#E8F5E9" android:padding="8dp" android:src="@android:drawable/ic_media_play" app:tint="#43A047" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Playback" android:textColor="#43A047" android:textSize="12sp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvCareBadge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="At risk"
-                android:textColor="#DC2626"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvCareSummary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="Healthy: 0 | Need Care: 1"
-                android:textColor="#111827" />
-
-            <TextView
-                android:id="@+id/tvGpsQuality"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Good GPS: 0% · Fair GPS: 0% · Weak GPS: 0%"
-                android:textColor="#6B7280"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:background="#FFFFFF"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Shortcuts"
-                android:textColor="#111827"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnShortcutMap"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Map" />
-
-            <Button
-                android:id="@+id/btnShortcutVehicles"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Vehicles" />
-
-            <Button
-                android:id="@+id/btnShortcutAlerts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Alerts" />
-
-            <Button
-                android:id="@+id/btnShortcutReports"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Reports" />
-
-            <Button
-                android:id="@+id/btnShortcutGeofence"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Geofence" />
-
-            <Button
-                android:id="@+id/btnShortcutPoi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="POI" />
-
-            <Button
-                android:id="@+id/btnShortcutPlayback"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Playback" />
-
-            <Button
-                android:id="@+id/btnShortcutSettings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Settings" />
-        </LinearLayout>
+            <!-- 8. Settings -->
+            <LinearLayout android:id="@+id/btnShortcutSettings" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="#FFFFFF" android:gravity="center" android:orientation="vertical" android:padding="12dp">
+                <ImageView android:layout_width="38dp" android:layout_height="38dp" android:background="#ECEFF1" android:padding="8dp" android:src="@android:drawable/ic_menu_preferences" app:tint="#546E7A" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Settings" android:textColor="#546E7A" android:textSize="12sp" />
+            </LinearLayout>
+        </GridLayout>
 
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
