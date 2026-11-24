@@ -1,4 +1,4 @@
-package com.example.yourapp; // তোমার প্যাকেজ নেম বসাবে
+package com.mygpsbd.app;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,7 +26,6 @@ public class DashboardFragment extends Fragment {
         tvOfflineCount = view.findViewById(R.id.tvOfflineCount);
         tvDistanceKm = view.findViewById(R.id.tvDistanceKm);
 
-        // Bundle থেকে লগইন করা ইউজারের ফোন/ইমেইল নেওয়া
         if (getArguments() != null && getArguments().containsKey("USER_CREDENTIAL")) {
             String userCred = getArguments().getString("USER_CREDENTIAL");
             if (userCred != null && !userCred.isEmpty()) {
@@ -34,10 +33,7 @@ public class DashboardFragment extends Fragment {
             }
         }
 
-        // ডামি ডাটা সেট করা
         loadDummyData();
-
-        // শর্টকাট বাটনগুলোর ক্লিক লিসেনার
         setupClickListeners(view);
 
         return view;
@@ -64,6 +60,8 @@ public class DashboardFragment extends Fragment {
     }
 
     private void showMsg(String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        if (getContext() != null) {
+            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        }
     }
 }
