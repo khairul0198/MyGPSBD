@@ -67,7 +67,16 @@ public class DashboardFragment extends Fragment {
         TextView tvStoppedCount = view.findViewById(R.id.tvStoppedCount);
         TextView tvCareSummary = view.findViewById(R.id.tvCareSummary);
 
-        if (tvUserPhone != null) tvUserPhone.setText("01601011171");
+        if (tvUserPhone != null) {
+            Bundle args = getArguments();
+            String userCredential = (args != null) ? args.getString("USER_CREDENTIAL") : null;
+            if (userCredential != null && !userCredential.trim().isEmpty()) {
+                tvUserPhone.setText(userCredential.trim());
+            } else {
+                tvUserPhone.setText("ফোন বা ইমেইল");
+            }
+        }
+
         if (tvFleetCount != null) tvFleetCount.setText("1");
         if (tvOnlineCount != null) tvOnlineCount.setText("0");
         if (tvOfflineCount != null) tvOfflineCount.setText("1");
